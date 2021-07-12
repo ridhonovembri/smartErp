@@ -1,0 +1,28 @@
+let express = require('express');
+let bodyParser = require('body-parser');
+let cors = require('cors');
+let passport = require('passport');
+let helmet = require('helmet');
+let fs = require('fs');
+let https = require('https');
+
+//declare express
+let app = express();
+
+//declare middleware for express
+app.use(helmet.hidePoweredBy());
+app.use(helmet.frameguard({action: 'SAMEORIGIN'}))
+app.use(cors());
+app.use(express.json());
+
+//declare customs middleware
+require('dotenv').config();
+
+//declare PORT
+const PORT = process.env.PORT || 8001;
+
+//create http server using express
+app.listen(PORT, () => {
+    console.log(`Listening on http://localhos:${PORT}`);   
+})
+
