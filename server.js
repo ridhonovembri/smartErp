@@ -5,6 +5,7 @@ let passport = require('passport');
 let helmet = require('helmet');
 let fs = require('fs');
 let https = require('https');
+let smartErp = require('./routes/smartErpRoute');
 
 //declare express
 let app = express();
@@ -14,6 +15,7 @@ app.use(helmet.hidePoweredBy());
 app.use(helmet.frameguard({action: 'SAMEORIGIN'}))
 app.use(cors());
 app.use(express.json());
+app.use(smartErp);
 
 //declare customs middleware
 require('dotenv').config();
