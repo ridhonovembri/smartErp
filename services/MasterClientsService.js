@@ -37,7 +37,9 @@ exports.update = async (id, data) => {
 
 exports.delete = async (id) => {
     try{
-        const result = await db.MasterClients.destroy(id);
+        const result = await db.MasterClients.destroy({
+            where: {IdClient: id}
+        });
         return result;   
     }
     catch(e){

@@ -36,15 +36,15 @@ module.exports = (sequelize, DataTypes) => {
                     notEmpty: false
                 }
             },
-            CreatedAt: {
-                type: DataTypes.DATE,                
-                allowNull: true,
-                field: "created_at",   
-                defaultValue: sequelize.fn('now'),             
-                validate: {
-                    notEmpty: false
-                }
-            },
+            // CreatedAt: {
+            //     type: DataTypes.DATE,                
+            //     allowNull: true,
+            //     field: "created_at",   
+            //     defaultValue: sequelize.fn('NOW'),             
+            //     validate: {
+            //         notEmpty: false
+            //     }
+            // },
             CreatedBy: {
                 type: DataTypes.STRING(50),                
                 allowNull: true,
@@ -53,15 +53,15 @@ module.exports = (sequelize, DataTypes) => {
                     notEmpty: false
                 }
             },
-            UpdateAt: {
-                type: DataTypes.DATE,                
-                allowNull: true,
-                field: "update_at",      
-                defaultValue: sequelize.fn('now'),              
-                validate: {
-                    notEmpty: false
-                }
-            },
+            // UpdateAt: {
+            //     type: DataTypes.DATE,                
+            //     allowNull: true,
+            //     field: "update_at",      
+            //     defaultValue: sequelize.fn('NOW'),              
+            //     validate: {
+            //         notEmpty: false
+            //     }
+            // },
             UpdateBy: {
                 type: DataTypes.STRING(50),                
                 allowNull: true,
@@ -74,7 +74,9 @@ module.exports = (sequelize, DataTypes) => {
         {
             freezeTableName: true,
             tableName: "master_clients",
-            timestamps: false
+            timestamps: true,
+            createdAt: 'created_at',
+            updatedAt: 'update_at'
         }
     );
 

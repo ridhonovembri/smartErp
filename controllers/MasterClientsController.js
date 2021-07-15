@@ -33,3 +33,12 @@ exports.update = (req, res) => {
 
     })
 }
+
+exports.delete = (req, res) => {
+    const id = req.params.id;
+
+    masterClientsService.delete(id)
+    .then(result => {
+        res.status(200).send({message:"Data Has Been Removed", status: true})
+    })
+}
