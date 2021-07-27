@@ -4,7 +4,17 @@
     "password": "galeri123",
     "database": "db_erp",
     "host": "103.52.147.70",
-    "dialect": "postgres"
+    "dialect": "postgres",
+    "logging": false, 
+    "timezone": "+7:00",
+    "dialecOptions":{
+      "useUTC": false
+    },
+    "pool": {
+      "max": 15,
+      "min": 0,
+      "idle": 10000
+    }
   },
   "test": {
     "username": "root",

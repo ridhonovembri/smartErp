@@ -30,6 +30,7 @@
     "pg-hstore": "^2.3.4",
     "random": "^3.0.6",
     "sequelize": "^6.6.5",
+    "uuid": "^8.3.2",
     "winston": "^3.3.3",
     "winston-daily-rotate-file": "^4.5.5"
   },

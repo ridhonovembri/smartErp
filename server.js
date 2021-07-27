@@ -5,7 +5,7 @@ let passport = require('passport');
 let helmet = require('helmet');
 let fs = require('fs');
 let https = require('https');
-let smartErp = require('./routes/smartErpRoute');
+let smartErp = require('./routes/SmartErpRoute');
 
 //declare express
 let app = express();
@@ -25,6 +25,6 @@ const PORT = process.env.PORT || 8001;
 
 //create http server using express
 app.listen(PORT, () => {
-    console.log(`Listening on http://localhos:${PORT}`);   
+    console.log(`Listening on http://localhost:${PORT}`);   
 })
 
