@@ -165,9 +165,9 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'IdClient',
             as: "masterclients",
         })
-        Pasiens.belongsTo(models.MasterCabangs, {
-            foreignKey: 'IdCabang',
-            as: "mastercabangs",
+        Pasiens.belongsTo(models.MasterBranches, {
+            foreignKey: 'BranchId',
+            as: "masterbranches",
         })
     }
 

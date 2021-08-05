@@ -1,106 +1,127 @@
 module.exports = (sequelize, DataTypes) => {
-    const MasterDokters = sequelize.define(
-        "MasterDokters",
+    const MasterDoctors = sequelize.define(
+        "MasterDoctors",
         {
-            IdDokter: {
+            DoctorId: {
                 type: DataTypes.INTEGER,                
                 primaryKey: true,
                 allowNull: false,
-                field: "iddokter",
+                field: "doctor_id",
                 autoIncrement: true,
                 validate: {
                     notEmpty: true
                 }
             },
-            IdClient: {
+            ClientId: {
                 type: DataTypes.INTEGER,    
                 allowNull: false,
-                field: "idclient",
+                field: "client_id",
                 references:  {
                     model: 'masterclients',
-                    key: 'idclient'
+                    key: 'clientid'
                 },
                 validate: {
                     notEmpty: true
                 }
             },
-            Nip: {
+            BranchId: {
+                type: DataTypes.INTEGER,    
+                allowNull: false,
+                field: "branch_id",
+                references:  {
+                    model: 'masterbranches',
+                    key: 'branchid'
+                },
+                validate: {
+                    notEmpty: true
+                }
+            },
+            Nik: {
                 type: DataTypes.STRING(50),                
                 allowNull: false,
                 unique: true,
-                field: "nip",                
+                field: "nik",                
                 validate: {
                     notEmpty: true
                 }
             },
-            NamaDokter: {
+            Str: {
+                type: DataTypes.STRING(50),                
+                allowNull: false,
+                unique: true,
+                field: "str",                
+                validate: {
+                    notEmpty: true
+                }
+            },
+            DoctorName: {
                 type: DataTypes.STRING(100),                
                 allowNull: false,
-                field: "namadokter",                
+                field: "doctor_name",                
                 validate: {
                     notEmpty: true
                 }
             },
-            TempatLahir: {
+            PlaceOfBirth: {
                 type: DataTypes.STRING(100),
                 allowNull: false,                
-                field: "tempat_lahir",                
+                field: "place_of_birth",                
                 validate: {
                     notEmpty: true
                 }
             },
-            TanggalLahir: {
+            DateOfBirth: {
                 type: DataTypes.DATE,
                 allowNull: false,                
-                field: "tanggal_lahir",                
+                field: "date_of_birth",                
                 validate: {
                     notEmpty: true
                 }
             },
-            Alamat: {
+            Address: {
                 type: DataTypes.STRING(200),
                 allowNull: true,                
-                field: "alamat",                
+                field: "address",                
                 validate: {
                     notEmpty: false
                 }
             },
-            Telepon1: {
+            PhoneNo1: {
                 type: DataTypes.STRING(50),
                 allowNull: true,                
-                field: "telepon_1",                
+                field: "phone_no_1",                
                 validate: {
                     notEmpty: false
                 }
             },
-            Telepon2: {
+            PhoneNo2: {
                 type: DataTypes.STRING(50),
                 allowNull: true,                
-                field: "telepon_2",                
+                field: "phone_no_2",                
                 validate: {
                     notEmpty: false
                 }
             },
-            Agama: {
+            Religion: {
                 type: DataTypes.STRING(50),
                 allowNull: false,                
-                field: "agama",                
+                field: "religion",                
                 validate: {
                     notEmpty: true
                 }
             },
-            Spesialis: {
+            Specialis: {
                 type: DataTypes.STRING(50),
                 allowNull: false,                
-                field: "spesialis",                
+                field: "specialis",                
                 validate: {
                     notEmpty: true
                 }
             },
-            PengalamanDari: {
+            ExperienceDate: {
                 type: DataTypes.DATE,
                 allowNull: false,                
-                field: "pengalaman_dari",                
+                field: "experience_date",                
                 validate: {
                     notEmpty: true
                 }
@@ -117,15 +138,15 @@ module.exports = (sequelize, DataTypes) => {
             CreatedBy: {
                 type: DataTypes.STRING(50),                
                 allowNull: true,
-                field: "created_by",                
+                field: "createdBy",                
                 validate: {
                     notEmpty: false
                 }
             },
-            UpdateBy: {
+            UpdatedBy: {
                 type: DataTypes.STRING(50),                
                 allowNull: true,
-                field: "update_by",                
+                field: "updatedBy",                
                 validate: {
                     notEmpty: false
                 }
@@ -133,19 +154,21 @@ module.exports = (sequelize, DataTypes) => {
         },
         {
             freezeTableName: true,
-            tableName: "master_dokters",
-            timestamps: true,
-            createdAt: 'created_at',
-            updatedAt: 'update_at'
+            tableName: "master_doctors",
         }
     );
 
-    MasterDokters.associate = function(models) {
-        MasterDokters.belongsTo(models.MasterClients, {
-            foreignKey: 'IdClient',
+    MasterDoctors.associate = function(models) {
+        MasterDoctors.belongsTo(models.MasterClients, {
+            foreignKey: 'ClientId',
             as: "masterclients",
+        })
+
+        MasterDoctors.belongsTo(models.MasterBranches, {
+            foreignKey: 'BranchId',
+            as: "masterbranches",
         })
     }
 
-    return MasterDokters;
+    return MasterDoctors;
 }

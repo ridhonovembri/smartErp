@@ -84,18 +84,24 @@ module.exports = (sequelize, DataTypes) => {
     );
 
     MasterDokterPolis.associate = function(models) {
-        MasterDokterPolis.belongsTo(models.MasterClients, {
-            foreignKey: 'IdClient',
-            as: "masterclients",
-        })
-        MasterDokterPolis.belongsTo(models.MasterDokters, {
-            foreignKey: 'IdDokter',
-            as: "masterdokters",
-        })
-        MasterDokterPolis.belongsTo(models.MasterPolis, {
-            foreignKey: 'IdPoli',
-            as: "masterpolis",
-        })
+        // MasterDoctors.belongsTo(models.MasterClients, {
+        //     foreignKey: 'ClientId',
+        //     as: "masterclients",
+        // })
+
+        // MasterDoctors.belongsTo(models.MasterBranches, {
+        //     foreignKey: 'BranchId',
+        //     as: "masterbranches",
+        // })
+
+        // MasterDokterPolis.belongsTo(models.MasterDokters, {
+        //     foreignKey: 'IdDokter',
+        //     as: "masterdokters",
+        // })
+        // MasterDokterPolis.belongsTo(models.MasterPolis, {
+        //     foreignKey: 'IdPoli',
+        //     as: "masterpolis",
+        // })
     }
 
     return MasterDokterPolis;

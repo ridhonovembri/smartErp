@@ -2,8 +2,8 @@ const db = require('../models');
 
 exports.getAll = async () => {
     try{
-        const result = await db.MasterCabangs.findAll({
-            orderBy: [["NamaCabang","ASC"]]
+        const result = await db.MasterDoctors.findAll({
+            orderBy: [["DoctorName","ASC"]]
         })
 
         return result;
@@ -15,7 +15,7 @@ exports.getAll = async () => {
 
 exports.getByPk = async (id) => {
     try{
-        const result = await db.MasterCabangs.findByPk(id);
+        const result = await db.MasterDoctors.findByPk(id);
 
         return result;
     }
@@ -24,22 +24,9 @@ exports.getByPk = async (id) => {
     }
 }
 
-exports.getByIdClient = async (id) => {
-    try{
-        const result = db.MasterCabangs.findAll({
-            where: { IdClient: id}
-        })
-
-        return result;
-    }
-    catch(e){
-        throw e;
-    }
-}
-
 exports.getByStatus = async (status) => {
     try{
-        const result = db.MasterCabangs.findAll({
+        const result = db.MasterDoctors.findAll({
             where: {IsActive: status}
         })
 
@@ -52,7 +39,7 @@ exports.getByStatus = async (status) => {
 
 exports.create = async (data) =>{
     try{
-        const result = await db.MasterCabangs.create(data);
+        const result = await db.MasterDoctors.create(data);
 
         return result;  
     }
@@ -63,8 +50,8 @@ exports.create = async (data) =>{
 
 exports.update = async (id, data) => {
     try{
-        const result = await db.MasterCabangs.update(data, {
-            where: { IdCabang:id}
+        const result = await db.MasterDoctors.update(data, {
+            where: { DoctorId:id}
         })
         
         return result;
@@ -76,8 +63,8 @@ exports.update = async (id, data) => {
 
 exports.delete = async (id) => {
     try{
-        const result = await db.MasterCabangs.destroy({
-            where: {IdCabang: id}
+        const result = await db.MasterDoctors.destroy({
+            where: {DoctorId: id}
         });
 
         return result;   

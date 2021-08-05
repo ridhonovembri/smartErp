@@ -1,9 +1,8 @@
-const masterClientsService = require('../services/MasterClientsService');
+const masterBranchesService = require('../services/MasterBranchesService');
 
 exports.getAll = (req, res) => {
-    masterClientsService.getAll()
+    masterBranchesService.getAll()
     .then(result => {
-        //console.log(result)
         res.status(200).send(JSON.stringify(result));
     })
     .catch(err => {
@@ -12,8 +11,7 @@ exports.getAll = (req, res) => {
 }
 
 exports.getByPk = (req, res) => {
-    //console.log(req.params.id)
-    masterClientsService.getByPk(req.params.id)
+    masterBranchesService.getByPk(req.param.id)
     .then(result => {
         res.status(200).send(JSON.stringify(result));
     })
@@ -22,8 +20,8 @@ exports.getByPk = (req, res) => {
     })
 }
 
-exports.getByUrl = (req, res) => {
-    masterClientsService.getByUrl(req.params.url)
+exports.getByClient = (req, res) => {
+    masterBranchesService.getByClient(req.params.id)
     .then(result => {
         res.status(200).send(JSON.stringify(result));
     })
@@ -33,7 +31,7 @@ exports.getByUrl = (req, res) => {
 }
 
 exports.getByStatus = (req, res) => {
-    masterClientsService.getByStatus(req.params.status)
+    masterBranchesService.getByStatus(req.params.status)
     .then(result => {
         res.status(200).send(JSON.stringify(result));
     })
@@ -42,26 +40,8 @@ exports.getByStatus = (req, res) => {
     })
 }
 
-// exports.getMultipleValues = (req, res) => {
-//     console.log(req.params.val1)
-//     console.log(req.params.val2)
-//     console.log(req.params.val3)
-//     console.log(req.params.val4)
-
-//     res.status(200).send("hai")
-// }
-
-// exports.getQueryString = (req, res) => {
-//     console.log(req.query.val1)
-//     console.log(req.query.val2)
-//     console.log(req.query.val3)
-//     console.log(req.query.val4)
-
-//     res.status(200).send("hai")
-// }
-
 exports.create = (req, res) => {
-    masterClientsService.create(req.body)
+    masterBranchesService.create(req.body)
     .then(result => {
         res.status(200).send({message: "Record Has Been Added", status: true})
     })
@@ -71,10 +51,9 @@ exports.create = (req, res) => {
 }
 
 exports.update = (req, res) => {
-
     const id = req.params.id;
 
-    masterClientsService.update(id, req.body)
+    masterBranchesService.update(id, req.body)
     .then((result) => {      
 
         if (result == 1){
@@ -93,7 +72,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
     const id = req.params.id;
 
-    masterClientsService.delete(id)
+    masterBranchesService.delete(id)
     .then(result => {
 
         if (result == 1){            

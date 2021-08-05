@@ -1,7 +1,7 @@
-const masterCabangsService = require('../services/MasterCabangsService');
+const masterDoctorsService = require('../services/MasterDoctorsService');
 
 exports.getAll = (req, res) => {
-    masterCabangsService.getAll()
+    masterDoctorsService.getAll()
     .then(result => {
         res.status(200).send(JSON.stringify(result));
     })
@@ -11,17 +11,7 @@ exports.getAll = (req, res) => {
 }
 
 exports.getByPk = (req, res) => {
-    masterCabangsService.getByPk(req.param.id)
-    .then(result => {
-        res.status(200).send(JSON.stringify(result));
-    })
-    .catch(err => {
-        console.log(err.message);
-    })
-}
-
-exports.getByIdClient = (req, res) => {
-    masterCabangsService.getByIdClient(req.params.id)
+    masterDoctorsService.getByPk(req.params.id)
     .then(result => {
         res.status(200).send(JSON.stringify(result));
     })
@@ -31,7 +21,7 @@ exports.getByIdClient = (req, res) => {
 }
 
 exports.getByStatus = (req, res) => {
-    masterCabangsService.getByStatus(req.params.status)
+    masterDoctorsService.getByStatus(req.params.status)
     .then(result => {
         res.status(200).send(JSON.stringify(result));
     })
@@ -41,7 +31,7 @@ exports.getByStatus = (req, res) => {
 }
 
 exports.create = (req, res) => {
-    masterCabangsService.create(req.body)
+    masterDoctorsService.create(req.body)
     .then(result => {
         res.status(200).send({message: "Record Has Been Added", status: true})
     })
@@ -51,9 +41,10 @@ exports.create = (req, res) => {
 }
 
 exports.update = (req, res) => {
+
     const id = req.params.id;
 
-    masterCabangsService.update(id, req.body)
+    masterDoctorsService.update(id, req.body)
     .then((result) => {      
 
         if (result == 1){
@@ -72,7 +63,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
     const id = req.params.id;
 
-    masterCabangsService.delete(id)
+    masterDoctorsService.delete(id)
     .then(result => {
 
         if (result == 1){            

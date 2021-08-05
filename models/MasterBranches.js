@@ -1,66 +1,66 @@
 module.exports = (sequelize, DataTypes) => {
-    const MasterCabangs = sequelize.define(
-        "MasterCabangs",
+    const MasterBranches = sequelize.define(
+        "MasterBranches",
         {
-            IdCabang: {
+            BranchId: {
                 type: DataTypes.INTEGER,                
                 primaryKey: true,
                 allowNull: false,
-                field: "idcabang",
+                field: "branch_id",
                 autoIncrement: true,
                 validate: {
                     notEmpty: true
                 }
             },
-            IdClient: {
+            ClientId: {
                 type: DataTypes.INTEGER,    
                 allowNull: false,
-                field: "idclient",
+                field: "client_id",
                 references:  {
                     model: 'masterclients',
-                    key: 'idclient'
+                    key: 'clientid'
                 },
                 validate: {
                     notEmpty: true
                 }
             },
-            NamaCabang: {
+            BranchName: {
                 type: DataTypes.STRING(100),                
                 allowNull: false,
                 unique: true,
-                field: "namacabang",                
+                field: "branch_name",                
                 validate: {
                     notEmpty: true
                 }
             },
-            Alamat: {
+            Address: {
                 type: DataTypes.STRING(500),                
                 allowNull: false,
-                field: "alamat",                
+                field: "address",                
                 validate: {
                     notEmpty: true
                 }
             },
-            Telepon1: {
+            PhoneNo1: {
                 type: DataTypes.STRING(50),
                 allowNull: true,                
-                field: "telepon_1",                
+                field: "phone_no_1",                
                 validate: {
                     notEmpty: false
                 }
             },
-            Telepon2: {
+            PhoneNo2: {
                 type: DataTypes.STRING(50),
                 allowNull: true,                
-                field: "telepon_2",                
+                field: "phone_no_2",                
                 validate: {
                     notEmpty: false
                 }
             },
-            JamOperasional: {
+            OperationalHour: {
                 type: DataTypes.STRING(50),
                 allowNull: true,                
-                field: "jam_operasional",                
+                field: "operational_hour",                
                 validate: {
                     notEmpty: false
                 }
@@ -102,15 +102,15 @@ module.exports = (sequelize, DataTypes) => {
             CreatedBy: {
                 type: DataTypes.STRING(50),                
                 allowNull: true,
-                field: "created_by",                
+                field: "createdBy",                
                 validate: {
                     notEmpty: false
                 }
             },
-            UpdateBy: {
+            UpdatedBy: {
                 type: DataTypes.STRING(50),                
                 allowNull: true,
-                field: "update_by",                
+                field: "updatedBy",                
                 validate: {
                     notEmpty: false
                 }
@@ -118,19 +118,17 @@ module.exports = (sequelize, DataTypes) => {
         },
         {
             freezeTableName: true,
-            tableName: "master_cabangs",
-            timestamps: true,
-            createdAt: 'created_at',
-            updatedAt: 'update_at'
+            tableName: "master_branches",            
         }
     );
 
-    MasterCabangs.associate = function(models) {
-        MasterCabangs.belongsTo(models.MasterClients, {
-            foreignKey: 'IdClient',
+    MasterBranches.associate = function(models) {
+        MasterBranches.belongsTo(models.MasterClients, {
+            foreignKey: 'ClientId',
             as: "masterclients",
+            onDelete: 'RESTRICT'
         })
     }
 
-    return MasterCabangs;
+    return MasterBranches;
 }

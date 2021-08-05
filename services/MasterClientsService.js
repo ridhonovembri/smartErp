@@ -3,7 +3,7 @@ const db = require('../models');
 exports.getAll = async () => {
     try{
         const result = await db.MasterClients.findAll({
-            orderBy: [["NamaClient","ASC"]]
+            orderBy: [["ClientName","ASC"]]
         })
 
         return result;
@@ -66,7 +66,7 @@ exports.create = async (data) =>{
 exports.update = async (id, data) => {
     try{
         const result = await db.MasterClients.update(data, {
-            where: { IdClient:id}
+            where: { ClientId:id}
         })
 
         //console.log("update ==> ", result);
@@ -80,7 +80,7 @@ exports.update = async (id, data) => {
 exports.delete = async (id) => {
     try{
         const result = await db.MasterClients.destroy({
-            where: {IdClient: id}
+            where: {ClientId: id}
         });
 
         return result;   

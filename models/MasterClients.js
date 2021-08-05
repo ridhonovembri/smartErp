@@ -2,21 +2,21 @@ module.exports = (sequelize, DataTypes) => {
     const MasterClients = sequelize.define(
         "MasterClients",
         {
-            IdClient: {
+            ClientId: {
                 type: DataTypes.INTEGER,                
                 primaryKey: true,
                 allowNull: false,
-                field: "idclient",
+                field: "client_id",
                 autoIncrement: true,
                 validate: {
                     notEmpty: true
                 }
             },
-            NamaClient: {
+            ClientName: {
                 type: DataTypes.STRING(50),                
                 allowNull: false,
                 unique: true,
-                field: "namaclient",                
+                field: "client_name",                
                 validate: {
                     notEmpty: true
                 }
@@ -49,15 +49,15 @@ module.exports = (sequelize, DataTypes) => {
             CreatedBy: {
                 type: DataTypes.STRING(50),                
                 allowNull: true,
-                field: "created_by",                
+                field: "createdBy",                
                 validate: {
                     notEmpty: false
                 }
             },
-            UpdateBy: {
+            UpdatedBy: {
                 type: DataTypes.STRING(50),                
                 allowNull: true,
-                field: "update_by",                
+                field: "updatedBy",                
                 validate: {
                     notEmpty: false
                 }
@@ -66,15 +66,15 @@ module.exports = (sequelize, DataTypes) => {
         {
             freezeTableName: true,
             tableName: "master_clients",
-            timestamps: true,
-            createdAt: 'created_at',
-            updatedAt: 'update_at'
+            // timestamps: true,
+            // createdAt: 'created_at',
+            // updatedAt: 'updated_at'
         }
     );
 
     MasterClients.associate = function(models) {
-        MasterClients.hasMany(models.MasterCabangs, {
-            foreignKey: "IdClient",
+        MasterClients.hasMany(models.MasterBranches, {
+            foreignKey: "ClientId",
             as: "masterclients",
             onDelete: 'RESTRICT'
         })

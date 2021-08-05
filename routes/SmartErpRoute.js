@@ -2,7 +2,8 @@ const express = require('express');
 const route = express.Router();
 
 const masterClientsController = require('../controllers/MasterClientsController');
-const masterCabangsController = require('../controllers/MasterCabangsController');
+const masterBranchesController = require('../controllers/MasterBranchesController');
+const masterDoctorsController = require('../controllers/MasterDoctorsController');
 const dummyController = require('../controllers/DummyController');
 
 /* MasterClients*/
@@ -18,13 +19,22 @@ route.delete('/api/masterclients/delete/:id', masterClientsController.delete);
 /*---------------*/
 
 /*MasterCabangs*/
-route.get('/api/masterCabangs/getAll', masterCabangsController.getAll)
-route.get('/api/masterCabangs/getByPk/:id', masterCabangsController.getByPk)
-route.get('/api/masterCabangs/getByIdClient/:id', masterCabangsController.getByIdClient)
-route.get('/api/masterCabangs/getByStatus/:status', masterCabangsController.getByStatus)
-route.post('/api/masterCabangs/post', masterCabangsController.create)
-route.put('/api/masterCabangs/update/:id', masterCabangsController.update);
-route.delete('/api/masterCabangs/delete/:id', masterCabangsController.delete);
+route.get('/api/masterBranches/getAll', masterBranchesController.getAll)
+route.get('/api/masterBranches/getByPk/:id', masterBranchesController.getByPk)
+route.get('/api/masterBranches/getByClient/:id', masterBranchesController.getByClient)
+route.get('/api/masterBranches/getByStatus/:status', masterBranchesController.getByStatus)
+route.post('/api/masterBranches/post', masterBranchesController.create)
+route.put('/api/masterBranches/update/:id', masterBranchesController.update);
+route.delete('/api/masterBranches/delete/:id', masterBranchesController.delete);
+/*---------------*/
+
+/*MasterDoctors*/
+route.get('/api/masterDoctors/getAll', masterDoctorsController.getAll)
+route.get('/api/masterDoctors/getByPk/:id', masterDoctorsController.getByPk)
+route.get('/api/masterDoctors/getByStatus/:status', masterDoctorsController.getByStatus)
+route.post('/api/masterDoctors/post', masterDoctorsController.create)
+route.put('/api/masterDoctors/update/:id', masterDoctorsController.update);
+route.delete('/api/masterDoctors/delete/:id', masterDoctorsController.delete);
 /*---------------*/
 
 route.get('/api/Dummy/getAll', dummyController.getAll)
