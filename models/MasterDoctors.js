@@ -125,7 +125,16 @@ module.exports = (sequelize, DataTypes) => {
                 validate: {
                     notEmpty: true
                 }
-            },            
+            },   
+            Trash: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                field: "trash",
+                defaultValue: 0,                     
+                validate: {
+                    notEmpty: true
+                }
+            },         
             IsActive: {
                 type: DataTypes.INTEGER,
                 allowNull: false,

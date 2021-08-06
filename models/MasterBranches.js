@@ -90,6 +90,15 @@ module.exports = (sequelize, DataTypes) => {
                     notEmpty: false
                 }
             },
+            Trash: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                field: "trash",
+                defaultValue: 0,                     
+                validate: {
+                    notEmpty: true
+                }
+            },
             IsActive: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -128,6 +137,17 @@ module.exports = (sequelize, DataTypes) => {
             as: "masterclients",
             onDelete: 'RESTRICT'
         })
+
+        MasterBranches.hasMany(models.MasterDoctors, {
+            foreignKey: "BranchId",            
+            onDelete: 'RESTRICT'
+        })     
+
+        MasterBranches.hasMany(models.MasterPatients, {
+            foreignKey: "BranchId",            
+            onDelete: 'RESTRICT'
+        }) 
+
     }
 
     return MasterBranches;

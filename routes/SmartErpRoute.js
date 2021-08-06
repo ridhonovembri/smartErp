@@ -4,6 +4,7 @@ const route = express.Router();
 const masterClientsController = require('../controllers/MasterClientsController');
 const masterBranchesController = require('../controllers/MasterBranchesController');
 const masterDoctorsController = require('../controllers/MasterDoctorsController');
+const masterPatientsController = require('../controllers/MasterPatientsController');
 const dummyController = require('../controllers/DummyController');
 
 /* MasterClients*/
@@ -35,6 +36,15 @@ route.get('/api/masterDoctors/getByStatus/:status', masterDoctorsController.getB
 route.post('/api/masterDoctors/post', masterDoctorsController.create)
 route.put('/api/masterDoctors/update/:id', masterDoctorsController.update);
 route.delete('/api/masterDoctors/delete/:id', masterDoctorsController.delete);
+/*---------------*/
+
+/*MasterPatients*/
+route.get('/api/masterPatients/getAll', masterPatientsController.getAll)
+route.get('/api/masterPatients/getByPk/:id', masterPatientsController.getByPk)
+route.get('/api/masterPatients/getByStatus/:status', masterPatientsController.getByStatus)
+route.post('/api/masterPatients/post', masterPatientsController.create)
+route.put('/api/masterPatients/update/:id', masterPatientsController.update);
+route.delete('/api/masterPatients/delete/:id', masterPatientsController.delete);
 /*---------------*/
 
 route.get('/api/Dummy/getAll', dummyController.getAll)
