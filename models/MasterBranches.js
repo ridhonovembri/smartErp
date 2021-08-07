@@ -147,6 +147,16 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: "BranchId",            
             onDelete: 'RESTRICT'
         }) 
+        
+        MasterBranches.hasMany(models.MasterPolis, {
+            foreignKey: "BranchId",            
+            onDelete: 'RESTRICT'
+        }) 
+
+        MasterBranches.hasMany(models.MasterServices, {
+            foreignKey: "BranchId",            
+            onDelete: 'RESTRICT'
+        }) 
 
     }
 

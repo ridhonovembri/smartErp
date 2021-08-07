@@ -6,6 +6,8 @@ const masterBranchesController = require('../controllers/MasterBranchesControlle
 const masterDoctorsController = require('../controllers/MasterDoctorsController');
 const masterPatientsController = require('../controllers/MasterPatientsController');
 const masterPolisController = require('../controllers/MasterPolisController');
+const masterServicesController = require('../controllers/MasterServicesController');
+const masterDoctorsScheduleController = require('../controllers/MasterDoctorsScheduleController');
 const dummyController = require('../controllers/DummyController');
 
 /* MasterClients*/
@@ -55,6 +57,24 @@ route.get('/api/masterPolis/getByStatus/:status', masterPolisController.getBySta
 route.post('/api/masterPolis/post', masterPolisController.create)
 route.put('/api/masterPolis/update/:id', masterPolisController.update);
 route.delete('/api/masterPolis/delete/:id', masterPolisController.delete);
+/*---------------*/
+
+/*MasterServices*/
+route.get('/api/masterServices/getAll', masterServicesController.getAll)
+route.get('/api/masterServices/getByPk/:id', masterServicesController.getByPk)
+route.get('/api/masterServices/getByStatus/:status', masterServicesController.getByStatus)
+route.post('/api/masterServices/post', masterServicesController.create)
+route.put('/api/masterServices/update/:id', masterServicesController.update);
+route.delete('/api/masterServices/delete/:id', masterServicesController.delete);
+/*---------------*/
+
+/*MasterDoctorsSchedule*/
+route.get('/api/masterDoctorsSchedule/getAll', masterDoctorsScheduleController.getAll)
+route.get('/api/masterDoctorsSchedule/getByPk/:id', masterDoctorsScheduleController.getByPk)
+route.get('/api/masterDoctorsSchedule/getByStatus/:status', masterDoctorsScheduleController.getByStatus)
+route.post('/api/masterDoctorsSchedule/post', masterDoctorsScheduleController.create)
+route.put('/api/masterDoctorsSchedule/update/:id', masterDoctorsScheduleController.update);
+route.delete('/api/masterDoctorsSchedule/delete/:id', masterDoctorsScheduleController.delete);
 /*---------------*/
 
 route.get('/api/Dummy/getAll', dummyController.getAll)

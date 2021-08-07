@@ -1,51 +1,65 @@
 module.exports = (sequelize, DataTypes) => {
-    const MasterDokterPolis = sequelize.define(
-        "MasterDokterPolis",
+    const MasterServices = sequelize.define(
+        "MasterServices",
         {
-            IdDokterPoli: {
+            ServiceId: {
                 type: DataTypes.INTEGER,                
                 primaryKey: true,
                 allowNull: false,
-                field: "iddokterpoli",
+                field: "service_id",
                 autoIncrement: true,
                 validate: {
                     notEmpty: true
                 }
             },
-            IdClient: {
+            ClientId: {
                 type: DataTypes.INTEGER,    
                 allowNull: false,
-                field: "idclient",
+                field: "client_id",
                 references:  {
                     model: 'masterclients',
-                    key: 'idclient'
+                    key: 'clientid'
                 },
                 validate: {
                     notEmpty: true
                 }
             },
-            IdDokter: {
+            BranchId: {
                 type: DataTypes.INTEGER,    
                 allowNull: false,
-                field: "iddokter",
+                field: "branch_id",
                 references:  {
-                    model: 'masterdokters',
-                    key: 'iddokter'
+                    model: 'masterbranches',
+                    key: 'branchid'
                 },
                 validate: {
                     notEmpty: true
                 }
             },
-            IdPoli: {
-                type: DataTypes.INTEGER,    
+            ServiceName: {
+                type: DataTypes.STRING(100),                
                 allowNull: false,
-                field: "idpoli",
-                references:  {
-                    model: 'masterpolis',
-                    key: 'idpoli'
-                },
+                unique: true,
+                field: "service_name",                
                 validate: {
                     notEmpty: true
+                }
+            },            
+            Description: {
+                type: DataTypes.INTEGER,
+                allowNull: true,                
+                field: "description",                             
+                validate: {
+                    notEmpty: false
+                }
+            },
+            Trash: {
+                type: DataTypes.INTEGER,
+                allowNull: true,                
+                field: "trash",   
+                defaultValue: 0,             
+                validate: {
+                    notEmpty: false
                 }
             },            
             IsActive: {
@@ -60,15 +74,15 @@ module.exports = (sequelize, DataTypes) => {
             CreatedBy: {
                 type: DataTypes.STRING(50),                
                 allowNull: true,
-                field: "created_by",                
+                field: "createdBy",                
                 validate: {
                     notEmpty: false
                 }
             },
-            UpdateBy: {
+            UpdatedBy: {
                 type: DataTypes.STRING(50),                
                 allowNull: true,
-                field: "update_by",                
+                field: "updatedBy",                
                 validate: {
                     notEmpty: false
                 }
@@ -76,33 +90,21 @@ module.exports = (sequelize, DataTypes) => {
         },
         {
             freezeTableName: true,
-            tableName: "master_dokter_polis",
-            timestamps: true,
-            createdAt: 'created_at',
-            updatedAt: 'update_at'
+            tableName: "master_services",
         }
     );
 
-    MasterDokterPolis.associate = function(models) {
-        // MasterDoctors.belongsTo(models.MasterClients, {
-        //     foreignKey: 'ClientId',
-        //     as: "masterclients",
-        // })
+    MasterServices.associate = function(models) {
+        MasterServices.belongsTo(models.MasterClients, {
+            foreignKey: 'ClientId',
+            as: "masterclients",
+        })
+        MasterServices.belongsTo(models.MasterBranches, {
+            foreignKey: 'BranchId',
+            as: "masterbranches",
+        })
 
-        // MasterDoctors.belongsTo(models.MasterBranches, {
-        //     foreignKey: 'BranchId',
-        //     as: "masterbranches",
-        // })
-
-        // MasterDokterPolis.belongsTo(models.MasterDokters, {
-        //     foreignKey: 'IdDokter',
-        //     as: "masterdokters",
-        // })
-        // MasterDokterPolis.belongsTo(models.MasterPolis, {
-        //     foreignKey: 'IdPoli',
-        //     as: "masterpolis",
-        // })
     }
 
-    return MasterDokterPolis;
+    return MasterServices;
 }

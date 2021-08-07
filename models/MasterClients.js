@@ -90,13 +90,21 @@ module.exports = (sequelize, DataTypes) => {
 
         MasterClients.hasMany(models.MasterDoctors, {
             foreignKey: "ClientId",
-            //as: "masterclients",
             onDelete: 'RESTRICT'
         })    
         
         MasterClients.hasMany(models.MasterPatients, {
             foreignKey: "ClientId",
-            //as: "masterclients",
+            onDelete: 'RESTRICT'
+        })   
+
+        MasterClients.hasMany(models.MasterPolis, {
+            foreignKey: "ClientId",
+            onDelete: 'RESTRICT'
+        })   
+
+        MasterClients.hasMany(models.MasterServices, {
+            foreignKey: "ClientId",
             onDelete: 'RESTRICT'
         })   
     }
