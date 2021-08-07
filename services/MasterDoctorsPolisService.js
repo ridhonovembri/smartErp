@@ -2,8 +2,8 @@ const db = require('../models');
 
 exports.getAll = async () => {
     try{
-        const result = await db.MasterServices.findAll({
-            include:[
+        const result = await db.MasterDoctorsPolis.findAll({
+            include: [ 
                 {
                     model: db.MasterClients,
                     as: "masterclients"
@@ -12,8 +12,16 @@ exports.getAll = async () => {
                     model: db.MasterBranches,
                     as: "masterbranches"
                 },
+                {
+                    model: db.MasterDoctors,
+                    as: "masterdoctors"
+                },
+                {
+                    model: db.MasterPolis,
+                    as: "masterpolis"
+                }
             ],
-            orderBy: [["ServiceName","ASC"]]
+            orderBy: [["DocterId","ASC"]]
         })
 
         return result;
@@ -25,7 +33,7 @@ exports.getAll = async () => {
 
 exports.getByPk = async (id) => {
     try{
-        const result = await db.MasterServices.findByPk(id);
+        const result = await db.MasterDoctorsPolis.findByPk(id);
 
         return result;
     }
@@ -36,7 +44,7 @@ exports.getByPk = async (id) => {
 
 exports.getByStatus = async (status) => {
     try{
-        const result = db.MasterServices.findAll({
+        const result = db.MasterDoctorsPolis.findAll({
             where: {IsActive: status}
         })
 
@@ -49,7 +57,7 @@ exports.getByStatus = async (status) => {
 
 exports.create = async (data) =>{
     try{
-        const result = await db.MasterServices.create(data);
+        const result = await db.MasterDoctorsPolis.create(data);
 
         return result;  
     }
@@ -60,8 +68,8 @@ exports.create = async (data) =>{
 
 exports.update = async (id, data) => {
     try{
-        const result = await db.MasterServices.update(data, {
-            where: { ServiceId:id}
+        const result = await db.MasterDoctorsPolis.update(data, {
+            where: { DoctorsPolisId:id}
         })
         
         return result;
@@ -73,8 +81,8 @@ exports.update = async (id, data) => {
 
 exports.delete = async (id) => {
     try{
-        const result = await db.MasterServices.destroy({
-            where: {ServiceId: id}
+        const result = await db.MasterDoctorsPolis.destroy({
+            where: {DoctorsPolisId: id}
         });
 
         return result;   

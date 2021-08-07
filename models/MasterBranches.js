@@ -138,25 +138,35 @@ module.exports = (sequelize, DataTypes) => {
             onDelete: 'RESTRICT'
         })
 
-        MasterBranches.hasMany(models.MasterDoctors, {
-            foreignKey: "BranchId",            
-            onDelete: 'RESTRICT'
-        })     
+        // MasterBranches.hasMany(models.MasterDoctors, {
+        //     foreignKey: "BranchId",            
+        //     onDelete: 'RESTRICT'
+        // })   
 
-        MasterBranches.hasMany(models.MasterPatients, {
-            foreignKey: "BranchId",            
-            onDelete: 'RESTRICT'
-        }) 
+        // MasterBranches.hasMany(models.MasterDoctorsPolis, {
+        //     foreignKey: "BranchId",            
+        //     onDelete: 'RESTRICT'
+        // })  
         
-        MasterBranches.hasMany(models.MasterPolis, {
-            foreignKey: "BranchId",            
-            onDelete: 'RESTRICT'
-        }) 
+        // MasterBranches.hasMany(models.MasterDoctorsSchedule, {
+        //     foreignKey: "BranchId",            
+        //     onDelete: 'RESTRICT'
+        // })   
 
-        MasterBranches.hasMany(models.MasterServices, {
-            foreignKey: "BranchId",            
-            onDelete: 'RESTRICT'
-        }) 
+        // MasterBranches.hasMany(models.MasterPatients, {
+        //     foreignKey: "BranchId",            
+        //     onDelete: 'RESTRICT'
+        // }) 
+        
+        // MasterBranches.hasMany(models.MasterPolis, {
+        //     foreignKey: "BranchId",            
+        //     onDelete: 'RESTRICT'
+        // }) 
+
+        // MasterBranches.hasMany(models.MasterServices, {
+        //     foreignKey: "BranchId",            
+        //     onDelete: 'RESTRICT'
+        // }) 
 
     }
 

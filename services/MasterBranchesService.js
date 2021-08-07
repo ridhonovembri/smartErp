@@ -3,6 +3,10 @@ const db = require('../models');
 exports.getAll = async () => {
     try{
         const result = await db.MasterBranches.findAll({
+            include: {
+                model: db.MasterClients,
+                as: "masterclients"
+            },
             orderBy: [["BranchName","ASC"]]
         })
 

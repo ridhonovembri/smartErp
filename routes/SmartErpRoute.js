@@ -8,6 +8,7 @@ const masterPatientsController = require('../controllers/MasterPatientsControlle
 const masterPolisController = require('../controllers/MasterPolisController');
 const masterServicesController = require('../controllers/MasterServicesController');
 const masterDoctorsScheduleController = require('../controllers/MasterDoctorsScheduleController');
+const masterDoctorsPolisController = require('../controllers/MasterDoctorsPolisController');
 const dummyController = require('../controllers/DummyController');
 
 /* MasterClients*/
@@ -75,6 +76,15 @@ route.get('/api/masterDoctorsSchedule/getByStatus/:status', masterDoctorsSchedul
 route.post('/api/masterDoctorsSchedule/post', masterDoctorsScheduleController.create)
 route.put('/api/masterDoctorsSchedule/update/:id', masterDoctorsScheduleController.update);
 route.delete('/api/masterDoctorsSchedule/delete/:id', masterDoctorsScheduleController.delete);
+/*---------------*/
+
+/*MasterDoctorsPolisSchedule*/
+route.get('/api/masterDoctorsPolis/getAll', masterDoctorsPolisController.getAll)
+route.get('/api/masterDoctorsPolis/getByPk/:id', masterDoctorsPolisController.getByPk)
+route.get('/api/masterDoctorsPolis/getByStatus/:status', masterDoctorsPolisController.getByStatus)
+route.post('/api/masterDoctorsPolis/post', masterDoctorsPolisController.create)
+route.put('/api/masterDoctorsPolis/update/:id', masterDoctorsPolisController.update);
+route.delete('/api/masterDoctorsPolis/delete/:id', masterDoctorsPolisController.delete);
 /*---------------*/
 
 route.get('/api/Dummy/getAll', dummyController.getAll)

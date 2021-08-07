@@ -1,12 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
-    const MasterPolis = sequelize.define(
-        "MasterPolis",
+    const MasterDoctorsPolis = sequelize.define(
+        "MasterDoctorsPolis",
         {
-            PoliId: {
+            DoctorsPolisId: {
                 type: DataTypes.INTEGER,                
                 primaryKey: true,
                 allowNull: false,
-                field: "poli_id",
+                field: "doctors_polis_id",
                 autoIncrement: true,
                 validate: {
                     notEmpty: true
@@ -36,33 +36,39 @@ module.exports = (sequelize, DataTypes) => {
                     notEmpty: true
                 }
             },
-            PoliName: {
-                type: DataTypes.STRING(100),                
+            DoctorId: {
+                type: DataTypes.INTEGER,    
                 allowNull: false,
-                unique: true,
-                field: "poli_name",                
+                field: "doctor_id",
+                references:  {
+                    model: 'masterdoctors',
+                    key: 'doctorid'
+                },
+                validate: {
+                    notEmpty: true
+                }
+            },
+            PoliId: {
+                type: DataTypes.INTEGER,    
+                allowNull: false,
+                field: "poli_id",
+                references:  {
+                    model: 'masterpolis',
+                    key: 'poliid'
+                },
                 validate: {
                     notEmpty: true
                 }
             },            
-            IsPublish: {
-                type: DataTypes.INTEGER,
-                allowNull: true,                
-                field: "is_publish",   
-                defaultValue: 1,             
-                validate: {
-                    notEmpty: false
-                }
-            },
             Trash: {
                 type: DataTypes.INTEGER,
-                allowNull: true,                
-                field: "trash",   
-                defaultValue: 0,             
+                allowNull: false,
+                field: "trash",
+                defaultValue: 0,                     
                 validate: {
-                    notEmpty: false
+                    notEmpty: true
                 }
-            },            
+            },         
             IsActive: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -91,25 +97,31 @@ module.exports = (sequelize, DataTypes) => {
         },
         {
             freezeTableName: true,
-            tableName: "master_polis",
+            tableName: "master_doctors_polis",
         }
     );
 
-    MasterPolis.associate = function(models) {
-        MasterPolis.belongsTo(models.MasterClients, {
+    MasterDoctorsPolis.associate = function(models) {
+        MasterDoctorsPolis.belongsTo(models.MasterClients, {
             foreignKey: 'ClientId',
             as: "masterclients",
         })
-        MasterPolis.belongsTo(models.MasterBranches, {
+
+        MasterDoctorsPolis.belongsTo(models.MasterBranches, {
             foreignKey: 'BranchId',
             as: "masterbranches",
         })
-        // MasterPolis.hasMany(models.MasterDoctorsPolis, {
-        //     foreignKey: 'PoliId',
-        //     as: "masterpolis",
-        // })
 
+        MasterDoctorsPolis.belongsTo(models.MasterDoctors, {
+            foreignKey: 'DoctorId',
+            as: "masterdoctors",
+        })
+
+        MasterDoctorsPolis.belongsTo(models.MasterPolis, {
+            foreignKey: 'PoliId',
+            as: "masterpolis",
+        })
     }
 
-    return MasterPolis;
+    return MasterDoctorsPolis;
 }

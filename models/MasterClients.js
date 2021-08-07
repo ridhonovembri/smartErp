@@ -81,33 +81,43 @@ module.exports = (sequelize, DataTypes) => {
         }
     );
 
-    MasterClients.associate = function(models) {
-        MasterClients.hasMany(models.MasterBranches, {
-            foreignKey: "ClientId",
-            as: "masterclients",
-            onDelete: 'RESTRICT'
-        })  
+    //MasterClients.associate = function(models) {
+        // MasterClients.hasMany(models.MasterBranches, {
+        //     foreignKey: "ClientId",
+        //     as: "masterclients",
+        //     onDelete: 'RESTRICT'
+        // })  
 
-        MasterClients.hasMany(models.MasterDoctors, {
-            foreignKey: "ClientId",
-            onDelete: 'RESTRICT'
-        })    
+        // MasterClients.hasMany(models.MasterDoctors, {
+        //     foreignKey: "ClientId",
+        //     onDelete: 'RESTRICT'
+        // })    
+
+        // MasterClients.hasMany(models.MasterDoctorsPolis, {
+        //     foreignKey: "ClientId",
+        //     onDelete: 'RESTRICT'
+        // }) 
+
+        // MasterClients.hasMany(models.MasterDoctorsSchedule, {
+        //     foreignKey: "ClientId",
+        //     onDelete: 'RESTRICT'
+        // })   
         
-        MasterClients.hasMany(models.MasterPatients, {
-            foreignKey: "ClientId",
-            onDelete: 'RESTRICT'
-        })   
+        // MasterClients.hasMany(models.MasterPatients, {
+        //     foreignKey: "ClientId",
+        //     onDelete: 'RESTRICT'
+        // })   
 
-        MasterClients.hasMany(models.MasterPolis, {
-            foreignKey: "ClientId",
-            onDelete: 'RESTRICT'
-        })   
+        // MasterClients.hasMany(models.MasterPolis, {
+        //     foreignKey: "ClientId",
+        //     onDelete: 'RESTRICT'
+        // })   
 
-        MasterClients.hasMany(models.MasterServices, {
-            foreignKey: "ClientId",
-            onDelete: 'RESTRICT'
-        })   
-    }
+        // MasterClients.hasMany(models.MasterServices, {
+        //     foreignKey: "ClientId",
+        //     onDelete: 'RESTRICT'
+        // })   
+    //}
 
     return MasterClients;
 }

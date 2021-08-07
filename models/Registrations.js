@@ -1,12 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
-    const MasterDoctors = sequelize.define(
-        "MasterDoctors",
+    const Registrations = sequelize.define(
+        "Registrations",
         {
-            DoctorId: {
+            RegId: {
                 type: DataTypes.INTEGER,                
                 primaryKey: true,
                 allowNull: false,
-                field: "doctor_id",
+                field: "reg_id",
                 autoIncrement: true,
                 validate: {
                     notEmpty: true
@@ -36,96 +36,110 @@ module.exports = (sequelize, DataTypes) => {
                     notEmpty: true
                 }
             },
-            Nik: {
-                type: DataTypes.STRING(50),                
+            PatientId: {
+                type: DataTypes.INTEGER,    
                 allowNull: false,
-                unique: true,
-                field: "nik",                
+                field: "patient_id",
+                references:  {
+                    model: 'masterpatients',
+                    key: 'patientid'
+                },
                 validate: {
                     notEmpty: true
                 }
             },
-            Str: {
-                type: DataTypes.STRING(50),                
+            ServiceId: {
+                type: DataTypes.INTEGER,    
                 allowNull: false,
-                unique: true,
-                field: "str",                
+                field: "service_id",
+                references:  {
+                    model: 'masterservices',
+                    key: 'serviceid'
+                },
                 validate: {
                     notEmpty: true
                 }
             },
-            DoctorName: {
-                type: DataTypes.STRING(100),                
+            DoctorsPolisId: {
+                type: DataTypes.INTEGER,    
                 allowNull: false,
-                field: "doctor_name",                
+                field: "doctors_polis_id",
+                references:  {
+                    model: 'masterdoctorspolis',
+                    key: 'doctorspolisid'
+                },
+                validate: {
+                    notEmpty: true
+                }
+            },            
+            ScheduleId: {
+                type: DataTypes.INTEGER,    
+                allowNull: false,
+                field: "schedule_id",
+                references:  {
+                    model: 'masterdoctorsschedule',
+                    key: 'scheduleid'
+                },
                 validate: {
                     notEmpty: true
                 }
             },
-            PlaceOfBirth: {
-                type: DataTypes.STRING(100),
+            RegNo: {
+                type: DataTypes.STRING(50),
                 allowNull: false,                
-                field: "place_of_birth",                
+                field: "reg_no",                
                 validate: {
                     notEmpty: true
                 }
             },
-            DateOfBirth: {
+            VisitDate: {
                 type: DataTypes.DATE,
                 allowNull: false,                
-                field: "date_of_birth",                
+                field: "visit_date",                
                 validate: {
                     notEmpty: true
                 }
             },
-            Address: {
-                type: DataTypes.STRING(200),
-                allowNull: true,                
-                field: "address",                
-                validate: {
-                    notEmpty: false
-                }
-            },
-            PhoneNo1: {
-                type: DataTypes.STRING(50),
-                allowNull: true,                
-                field: "phone_no_1",                
-                validate: {
-                    notEmpty: false
-                }
-            },
-            PhoneNo2: {
-                type: DataTypes.STRING(50),
-                allowNull: true,                
-                field: "phone_no_2",                
-                validate: {
-                    notEmpty: false
-                }
-            },
-            Religion: {
-                type: DataTypes.STRING(50),
+            VisitTime: {
+                type: DataTypes.TIME,
                 allowNull: false,                
-                field: "religion",                
+                field: "visit_time",                
                 validate: {
                     notEmpty: true
                 }
             },
-            Specialis: {
-                type: DataTypes.STRING(50),
-                allowNull: false,                
-                field: "specialis",                
-                validate: {
-                    notEmpty: true
-                }
-            },
-            ExperienceDate: {
+            RegDate: {
                 type: DataTypes.DATE,
                 allowNull: false,                
-                field: "experience_date",                
+                field: "reg_date",                
                 validate: {
                     notEmpty: true
                 }
-            },   
+            },
+            Status: {
+                type: DataTypes.STRING(20),
+                allowNull: false,                
+                field: "status",                
+                validate: {
+                    notEmpty: true
+                }
+            },
+            PaymentMethod: {
+                type: DataTypes.STRING(20),
+                allowNull: false,                
+                field: "payment_method",                
+                validate: {
+                    notEmpty: true
+                }
+            },
+            PaymentStatus: {
+                type: DataTypes.STRING(20),
+                allowNull: false,                
+                field: "payment_status",                
+                validate: {
+                    notEmpty: true
+                }
+            },
             Trash: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -134,16 +148,7 @@ module.exports = (sequelize, DataTypes) => {
                 validate: {
                     notEmpty: true
                 }
-            },         
-            IsActive: {
-                type: DataTypes.INTEGER,
-                allowNull: false,
-                field: "is_active",
-                defaultValue: 1,                     
-                validate: {
-                    notEmpty: true
-                }
-            },
+            },                     
             CreatedBy: {
                 type: DataTypes.STRING(50),                
                 allowNull: true,
@@ -163,26 +168,42 @@ module.exports = (sequelize, DataTypes) => {
         },
         {
             freezeTableName: true,
-            tableName: "master_doctors",
+            tableName: "master_doctors_polis",
         }
     );
 
-    MasterDoctors.associate = function(models) {
-        MasterDoctors.belongsTo(models.MasterClients, {
+    Registrations.associate = function(models) {
+        Registrations.belongsTo(models.MasterClients, {
             foreignKey: 'ClientId',
             as: "masterclients",
         })
 
-        MasterDoctors.belongsTo(models.MasterBranches, {
+        Registrations.belongsTo(models.MasterBranches, {
             foreignKey: 'BranchId',
             as: "masterbranches",
         })
 
-        // MasterDoctors.hasMany(models.MasterDoctorsPolis, {
-        //     foreignKey: 'DoctorId',
-        //     as: "masterdoctors",
-        // })
+        Registrations.belongsTo(models.MasterPatients, {
+            foreignKey: 'PatientId',
+            as: "masterpatients",
+        })
+
+        Registrations.belongsTo(models.MasterServices, {
+            foreignKey: 'ServiceId',
+            as: "masterservices",
+        })
+
+        Registrations.belongsTo(models.MasterDoctorsPolis, {
+            foreignKey: 'DoctorsPolisId',
+            as: "masterdoctorspolis",
+        })
+
+        Registrations.belongsTo(models.MasterDoctorsSchedule, {
+            foreignKey: 'ScheduleId',
+            as: "masterdoctorsschedule",
+        })
+
     }
 
-    return MasterDoctors;
+    return Registrations;
 }

@@ -3,6 +3,16 @@ const db = require('../models');
 exports.getAll = async () => {
     try{
         const result = await db.MasterPatients.findAll({
+            include:[
+                {
+                    model: db.MasterClients,
+                    as: "masterclients"
+                },
+                {
+                    model: db.MasterBranches,
+                    as: "masterbranches"
+                },
+            ],
             orderBy: [["PatientName","ASC"]]
         })
 
