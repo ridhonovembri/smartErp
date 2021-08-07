@@ -2,42 +2,63 @@ module.exports = (sequelize, DataTypes) => {
     const MasterPolis = sequelize.define(
         "MasterPolis",
         {
-            IdPoli: {
+            PoliId: {
                 type: DataTypes.INTEGER,                
                 primaryKey: true,
                 allowNull: false,
-                field: "idpoli",
+                field: "poli_id",
                 autoIncrement: true,
                 validate: {
                     notEmpty: true
                 }
             },
-            IdClient: {
+            ClientId: {
                 type: DataTypes.INTEGER,    
                 allowNull: false,
-                field: "idclient",
+                field: "client_id",
                 references:  {
                     model: 'masterclients',
-                    key: 'idclient'
+                    key: 'clientid'
                 },
                 validate: {
                     notEmpty: true
                 }
             },
-            NamaPoli: {
+            BranchId: {
+                type: DataTypes.INTEGER,    
+                allowNull: false,
+                field: "branch_id",
+                references:  {
+                    model: 'masterbranches',
+                    key: 'branchid'
+                },
+                validate: {
+                    notEmpty: true
+                }
+            },
+            PoliName: {
                 type: DataTypes.STRING(100),                
                 allowNull: false,
                 unique: true,
-                field: "namapoli",                
+                field: "poli_name",                
                 validate: {
                     notEmpty: true
                 }
             },            
             IsPublish: {
-                type: DataTypes.STRING(50),
+                type: DataTypes.INTEGER,
                 allowNull: true,                
                 field: "is_publish",   
                 defaultValue: 1,             
+                validate: {
+                    notEmpty: false
+                }
+            },
+            Trash: {
+                type: DataTypes.INTEGER,
+                allowNull: true,                
+                field: "trash",   
+                defaultValue: 0,             
                 validate: {
                     notEmpty: false
                 }
@@ -54,15 +75,15 @@ module.exports = (sequelize, DataTypes) => {
             CreatedBy: {
                 type: DataTypes.STRING(50),                
                 allowNull: true,
-                field: "created_by",                
+                field: "createdBy",                
                 validate: {
                     notEmpty: false
                 }
             },
-            UpdateBy: {
+            UpdatedBy: {
                 type: DataTypes.STRING(50),                
                 allowNull: true,
-                field: "update_by",                
+                field: "updatedBy",                
                 validate: {
                     notEmpty: false
                 }
@@ -71,17 +92,19 @@ module.exports = (sequelize, DataTypes) => {
         {
             freezeTableName: true,
             tableName: "master_polis",
-            timestamps: true,
-            createdAt: 'created_at',
-            updatedAt: 'update_at'
         }
     );
 
     MasterPolis.associate = function(models) {
         MasterPolis.belongsTo(models.MasterClients, {
-            foreignKey: 'IdClient',
+            foreignKey: 'ClientId',
             as: "masterclients",
         })
+        MasterPolis.belongsTo(models.MasterBranches, {
+            foreignKey: 'BranchId',
+            as: "masterbranches",
+        })
+
     }
 
     return MasterPolis;

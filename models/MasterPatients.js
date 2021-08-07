@@ -93,6 +93,14 @@ module.exports = (sequelize, DataTypes) => {
                     notEmpty: false
                 }
             },
+            Address: {
+                type: DataTypes.STRING(500),
+                allowNull: true,                
+                field: "address",                
+                validate: {
+                    notEmpty: false
+                }
+            },
             PhoneNo: {
                 type: DataTypes.STRING(20),
                 allowNull: true,                
