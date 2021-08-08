@@ -168,7 +168,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         {
             freezeTableName: true,
-            tableName: "master_doctors_polis",
+            tableName: "registrations",
         }
     );
 
@@ -176,31 +176,37 @@ module.exports = (sequelize, DataTypes) => {
         Registrations.belongsTo(models.MasterClients, {
             foreignKey: 'ClientId',
             as: "masterclients",
+            onDelete: 'RESTRICT'
         })
 
         Registrations.belongsTo(models.MasterBranches, {
             foreignKey: 'BranchId',
             as: "masterbranches",
+            onDelete: 'RESTRICT'
         })
 
         Registrations.belongsTo(models.MasterPatients, {
             foreignKey: 'PatientId',
             as: "masterpatients",
+            onDelete: 'RESTRICT'
         })
 
         Registrations.belongsTo(models.MasterServices, {
             foreignKey: 'ServiceId',
             as: "masterservices",
+            onDelete: 'RESTRICT'
         })
 
         Registrations.belongsTo(models.MasterDoctorsPolis, {
             foreignKey: 'DoctorsPolisId',
             as: "masterdoctorspolis",
+            onDelete: 'RESTRICT'
         })
 
         Registrations.belongsTo(models.MasterDoctorsSchedule, {
             foreignKey: 'ScheduleId',
             as: "masterdoctorsschedule",
+            onDelete: 'RESTRICT'
         })
 
     }

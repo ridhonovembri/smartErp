@@ -9,6 +9,8 @@ const masterPolisController = require('../controllers/MasterPolisController');
 const masterServicesController = require('../controllers/MasterServicesController');
 const masterDoctorsScheduleController = require('../controllers/MasterDoctorsScheduleController');
 const masterDoctorsPolisController = require('../controllers/MasterDoctorsPolisController');
+const registrationsController = require('../controllers/registrationsController');
+const authUsersController = require('../controllers/authUsersController');
 const dummyController = require('../controllers/DummyController');
 
 /* MasterClients*/
@@ -78,13 +80,34 @@ route.put('/api/masterDoctorsSchedule/update/:id', masterDoctorsScheduleControll
 route.delete('/api/masterDoctorsSchedule/delete/:id', masterDoctorsScheduleController.delete);
 /*---------------*/
 
-/*MasterDoctorsPolisSchedule*/
+/*MasterDoctorsPolis*/
 route.get('/api/masterDoctorsPolis/getAll', masterDoctorsPolisController.getAll)
 route.get('/api/masterDoctorsPolis/getByPk/:id', masterDoctorsPolisController.getByPk)
 route.get('/api/masterDoctorsPolis/getByStatus/:status', masterDoctorsPolisController.getByStatus)
 route.post('/api/masterDoctorsPolis/post', masterDoctorsPolisController.create)
 route.put('/api/masterDoctorsPolis/update/:id', masterDoctorsPolisController.update);
 route.delete('/api/masterDoctorsPolis/delete/:id', masterDoctorsPolisController.delete);
+/*---------------*/
+
+/*Registrations*/
+route.get('/api/registrations/getAll', registrationsController.getAll)
+route.get('/api/registrations/getByPk/:id', registrationsController.getByPk)
+route.get('/api/registrations/getByStatus/:status', registrationsController.getByStatus)
+route.post('/api/registrations/post', registrationsController.create)
+route.put('/api/registrations/update/:id', registrationsController.update);
+route.delete('/api/registrations/delete/:id', registrationsController.delete);
+/*---------------*/
+
+/*AuthUsers*/
+route.get('/api/authUsers/getAll', authUsersController.getAll)
+route.get('/api/authUsers/getByPk/:id', authUsersController.getByPk)
+route.get('/api/authUsers/getByStatus/:status', authUsersController.getByStatus)
+route.post('/api/authUsers/post', authUsersController.create)
+route.put('/api/authUsers/update/:id', authUsersController.update);
+route.delete('/api/authUsers/delete/:id', authUsersController.delete);
+route.put('/api/authUsers/resetPassword/:id', authUsersController.resetPassword);
+route.post('/api/authUsers/signIn', authUsersController.signIn);
+route.post('/api/authUsers/signOut', authUsersController.signOut);
 /*---------------*/
 
 route.get('/api/Dummy/getAll', dummyController.getAll)

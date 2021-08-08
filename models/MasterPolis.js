@@ -99,10 +99,12 @@ module.exports = (sequelize, DataTypes) => {
         MasterPolis.belongsTo(models.MasterClients, {
             foreignKey: 'ClientId',
             as: "masterclients",
+            onDelete: 'RESTRICT'
         })
         MasterPolis.belongsTo(models.MasterBranches, {
             foreignKey: 'BranchId',
             as: "masterbranches",
+            onDelete: 'RESTRICT'
         })
         // MasterPolis.hasMany(models.MasterDoctorsPolis, {
         //     foreignKey: 'PoliId',

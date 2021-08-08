@@ -1,12 +1,12 @@
 module.exports = (sequelize, DataTypes) => {
-    const MasterDoctorsPolis = sequelize.define(
-        "MasterDoctorsPolis",
+    const AuthUsers = sequelize.define(
+        "AuthUsers",
         {
-            DoctorsPolisId: {
+            UserId: {
                 type: DataTypes.INTEGER,                
                 primaryKey: true,
                 allowNull: false,
-                field: "doctors_polis_id",
+                field: "user_id",
                 autoIncrement: true,
                 validate: {
                     notEmpty: true
@@ -36,30 +36,40 @@ module.exports = (sequelize, DataTypes) => {
                     notEmpty: true
                 }
             },
-            DoctorId: {
-                type: DataTypes.INTEGER,    
+            UserName: {
+                type: DataTypes.STRING(100),                
                 allowNull: false,
-                field: "doctor_id",
-                references:  {
-                    model: 'masterdoctors',
-                    key: 'doctorid'
-                },
+                unique: true,
+                field: "user_name",                
                 validate: {
                     notEmpty: true
                 }
             },
-            PoliId: {
-                type: DataTypes.INTEGER,    
-                allowNull: false,
-                field: "poli_id",
-                references:  {
-                    model: 'masterpolis',
-                    key: 'poliid'
-                },
+            UserPassword: {
+                type: DataTypes.TEXT,                
+                allowNull: true,
+                unique: true,
+                field: "user_password",                
                 validate: {
-                    notEmpty: true
+                    notEmpty: false
                 }
-            },            
+            },
+            PasswordDefault: {
+                type: DataTypes.TEXT,                
+                allowNull: true,
+                field: "password_default",                
+                validate: {
+                    notEmpty: false
+                }
+            },     
+            Email: {
+                type: DataTypes.STRING(100),                
+                allowNull: true,
+                field: "email",                
+                validate: {
+                    notEmpty: false
+                }
+            },           
             Trash: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
@@ -76,6 +86,39 @@ module.exports = (sequelize, DataTypes) => {
                 defaultValue: 1,                     
                 validate: {
                     notEmpty: true
+                }
+            },
+            IsLock: {
+                type: DataTypes.INTEGER,
+                allowNull: false,
+                field: "is_lock",
+                defaultValue: 0,                     
+                validate: {
+                    notEmpty: true
+                }
+            },
+            LastLogin: {
+                type: DataTypes.DATE,
+                allowNull: true,
+                field: "last_login",                
+                validate: {
+                    notEmpty: false
+                }
+            },
+            LastLogout: {
+                type: DataTypes.DATE,
+                allowNull: true,
+                field: "last_logout",                                  
+                validate: {
+                    notEmpty: false
+                }
+            },
+            IsLogged: {
+                type: DataTypes.INTEGER,
+                allowNull: true,
+                field: "is_logged",                                  
+                validate: {
+                    notEmpty: false
                 }
             },
             CreatedBy: {
@@ -97,35 +140,23 @@ module.exports = (sequelize, DataTypes) => {
         },
         {
             freezeTableName: true,
-            tableName: "master_doctors_polis",
+            tableName: "auth_users",
         }
     );
 
-    MasterDoctorsPolis.associate = function(models) {
-        MasterDoctorsPolis.belongsTo(models.MasterClients, {
+    AuthUsers.associate = function(models) {
+        AuthUsers.belongsTo(models.MasterClients, {
             foreignKey: 'ClientId',
             as: "masterclients",
             onDelete: 'RESTRICT'
         })
 
-        MasterDoctorsPolis.belongsTo(models.MasterBranches, {
+        AuthUsers.belongsTo(models.MasterBranches, {
             foreignKey: 'BranchId',
             as: "masterbranches",
             onDelete: 'RESTRICT'
         })
-
-        MasterDoctorsPolis.belongsTo(models.MasterDoctors, {
-            foreignKey: 'DoctorId',
-            as: "masterdoctors",
-            onDelete: 'RESTRICT'
-        })
-
-        MasterDoctorsPolis.belongsTo(models.MasterPolis, {
-            foreignKey: 'PoliId',
-            as: "masterpolis",
-            onDelete: 'RESTRICT'
-        })
     }
 
-    return MasterDoctorsPolis;
+    return AuthUsers;
 }

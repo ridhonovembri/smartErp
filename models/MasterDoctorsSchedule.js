@@ -117,10 +117,12 @@ module.exports = (sequelize, DataTypes) => {
         MasterDoctorsSchedule.belongsTo(models.MasterClients, {
             foreignKey: 'ClientId',
             as: "masterclients",
+            onDelete: 'RESTRICT'
         })
         MasterDoctorsSchedule.belongsTo(models.MasterBranches, {
             foreignKey: 'BranchId',
             as: "masterbranches",
+            onDelete: 'RESTRICT'
         })
 
     }
